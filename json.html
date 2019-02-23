@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>JSON</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+    </head>
+    <body>
+        <h1>JSON</h1>
+        <p>JavaScript Object Notation (JSON).</p>
+        <h2>Parse</h2>
+        <p>A common use of JSON is to exchange data to/from a web server.
+            When receiving data from a web server, the data is always a string.
+            Parse the data with JSON.parse(), and the data becomes a JavaScript object.</p>
+        <h3>Results</h3>
+        <p>Will display the objects name, age, and place I live.
+        <p id="json"></p>
+        
+        <script>
+            //variable txt
+            //Double quotes around objects, if not will not call properly.
+            var txt = '{"name":"Keith", "age":38, "city":"Boise"}'
+            var obj = JSON.parse(txt);
+            document.getElementById("json").innerHTML = obj.name + ", " + obj.age + ", " + obj.city; 
+        </script>
+        <h3>String Into Function</h3>
+        <p id="json1"></p>
+        <script>
+            var text = '{"name":"Keith", "age":"function() {return 38;}", "city":"Boise"}';
+            var obj = JSON.parse(text);
+            obj.age = eval("(" + obj.age + ")");
+            document.getElementById("json1").innerHTML = obj.name + ", " + obj.age(); 
+        </script>
+        
+        <h2>Stringify</h2>
+        <p>The entire string will be displayed. A common use of JSON is to exchange data to/from a web server.
+When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().</p>
+        <h3>Results</h3>
+        <p id="json3"></p>
+        <script>
+            var txt = { "name":"Keith", "age":38, "city":"Boise" };
+            var obj = JSON.stringify(txt);
+            document.getElementById("json3").innerHTML = obj;
+
+        </script>
+        
+        <h3>Stringify Functions</h3>
+        <p>JSON.stringify will remove any functions.</p>
+        <h3>Results</h3>
+        <p id="json4"></p>
+        <script>
+            var obj = { name: "Keith", age: function () {return 38;}, city: "Boise" };
+            var myJSON = JSON.stringify(obj);   
+            document.getElementById("json4").innerHTML = myJSON;
+</script>
+    </body>
+</html>
